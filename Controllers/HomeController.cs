@@ -30,7 +30,7 @@ namespace VerifyWithAspNetCore2.Controllers
         // Integrate with Criipto Verify, part 4:
         //  - reference the named authorization policy as configured in the ConfigureServices stage, and let the middleware handle the authentication flow.
         [Authorize(Policy = "CriiptoVerifyAuthenticatedUser")]
-        public IActionResult UserClaims()
+        public IActionResult Login()
         {
             var viewModels =
                 this.User.Claims
