@@ -1,0 +1,32 @@
+﻿@model IEnumerable<VerifyWithAspNetCore2.Models.ClaimViewModel>
+
+@{
+    ViewData["Title"] = "Authenticated user claims";
+}
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClaimType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClaimValue)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClaimType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClaimValue)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

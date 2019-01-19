@@ -32,6 +32,12 @@ namespace VerifyWithAspNetCore2.Controllers
         [Authorize(Policy = "CriiptoVerifyAuthenticatedUser")]
         public IActionResult Login()
         {
+            return this.View();
+        }
+
+        [Authorize(Policy = "CriiptoVerifyAuthenticatedUser")]
+        public IActionResult UserClaims()
+        {
             var viewModels =
                 this.User.Claims
                     .Select(c => new ClaimViewModel { ClaimType = c.Type, ClaimValue = c.Value })

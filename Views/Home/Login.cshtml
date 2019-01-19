@@ -1,33 +1,28 @@
-﻿@model IEnumerable<VerifyWithAspNetCore2.Models.ClaimViewModel>
-
-@{
-    ViewData["Title"] = "Authenticated user claims";
+﻿@{
+    ViewData["Title"] = "Login";
 }
-<h2>@ViewData["Title"]</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ClaimType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClaimValue)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClaimType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClaimValue)
-                </td>
-            </tr>
+@if (User.Identity.IsAuthenticated)
+{
+<script type="text/javascript">
+    var isInIframe = function () {
+        try {
+            return window.self !== window.top;
         }
-    </tbody>
-</table>
+        catch (e) {
+            return true;
+        }
+    }
 
+    if (isInIframe()) {
+        var target = parent;
+        var origin =
+            document.location.origin ||
+            document.location.protocol + "//" + document.location.host;
+        var message = { userLoggedIn: true };
+        target.postMessage(message, origin);
+    } else {
+        document.location = "/Home/UserClaims";
+    }
+</script>
+}
