@@ -3,6 +3,16 @@
 }
 
 <div class="row">
+    <div class="col-lg-6">
+        <div id="login">
+            <iframe src="" id="verify" title="Criipto-Verify" class="hidden-frame"
+                    allowfullscreen="true" scrolling="no" frameborder="0">
+            </iframe>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <h3>Sweden</h3>
 </div>
 <div class="row">
@@ -11,8 +21,8 @@
             <img src="/images/logo-e-id-se-bankid.svg" alt="Swedish BankID" />
             <div class="caption text-center">
                 <p>
-                    <a href="Home/Login?acrValue=urn:grn:authn:se:bankid:same-device" class="btn btn-primary" role="button">This device</a>
-                    <a href="Home/Login?acrValue=urn:grn:authn:se:bankid:another-device" class="btn btn-primary" role="button">Another device</a>
+                    <a href="#" onClick="selectStrategy('urn:grn:authn:se:bankid:same-device', 'Home/Login')" class="btn btn-primary" role="button">This device</a>
+                    <a href="#" onClick="selectStrategy('urn:grn:authn:se:bankid:another-device', 'Home/Login')" class="btn btn-primary" role="button">Another device</a>
                 </p>
             </div>
         </div>
@@ -28,9 +38,9 @@
             <img src="/images/logo-e-id-dk-nemid.svg" alt="Danish NemID" />
             <div class="caption text-center">
                 <p>
-                    <a href="Home/Login?acrValue=urn:grn:authn:dk:nemid:poces" class="btn btn-primary" role="button">Citizen</a>
-                    <a href="Home/Login?acrValue=urn:grn:authn:dk:nemid:moces" class="btn btn-primary" role="button">Employee</a>
-                    <a href="Home/Login?acrValue=urn:grn:authn:dk:nemid:moces:codefile" class="btn btn-primary" role="button">Employee codefile</a>
+                    <a href="#" onClick="selectStrategy('urn:grn:authn:dk:nemid:poces', 'Home/Login')" class="btn btn-primary" role="button">Citizen</a>
+                    <a href="#" onClick="selectStrategy('urn:grn:authn:dk:nemid:moces', 'Home/Login')" class="btn btn-primary" role="button">Employee</a>
+                    <a href="#" onClick="selectStrategy('urn:grn:authn:dk:nemid:moces:codefile', 'Home/Login'") class="btn btn-primary" role="button">Employee codefile</a>
                 </p>
             </div>
         </div>
@@ -46,8 +56,8 @@
             <img src="/images/logo-e-id-no-bankid.svg" alt="Norwegian BankID" />
             <div class="caption text-center">
                 <p>
-                    <a href="Home/Login?acrValue=urn:grn:authn:no:bankid:central" class="btn btn-primary" role="button">Kodebrikke</a>
-                    <a href="Home/Login?acrValue=urn:grn:authn:no:bankid:mobile" class="btn btn-primary" role="button">Mobil</a>
+                    <a href="#" onClick="selectStrategy('urn:grn:authn:no:bankid:central', 'Home/Login')" class="btn btn-primary" role="button">Kodebrikke</a>
+                    <a href="#" onClick="selectStrategy('urn:grn:authn:no:bankid:mobile', 'Home/Login')" class="btn btn-primary" role="button">Mobil</a>
                 </p>
             </div>
         </div>
@@ -58,13 +68,14 @@
     <h3>Finland</h3>
 </div>
 <div class="row">
-    <div class="col-sm-6 col-md-3">
+    <div class="col-sm-7 col-md-5">
         <div class="thumbnail">
             <img src="/images/logo-e-id-fi.png" alt="Finnish TUPAS" />
             <div class="caption text-center">
                 <p>
-                    <a href="Home/Login?acrValue=urn:grn:authn:fi:tupas" class="btn btn-primary" role="button">TUPAS</a>
-                    <a href="Home/Login?acrValue=urn:grn:authn:fi:mobile-id" class="btn btn-primary" role="button">Mobile Id</a>
+                    <a href="#" onClick="selectStrategy('urn:grn:authn:fi:tupas', 'Home/Login')" class="btn btn-primary" role="button">TUPAS</a>
+                    <a href="#" onClick="selectStrategy('urn:grn:authn:fi:mobile-id', 'Home/Login')" class="btn btn-primary" role="button">Mobile Id</a>
+                    <a href="#" onClick="selectStrategy('urn:grn:authn:fi:all', 'Home/Login')" class="btn btn-primary" role="button">All available</a>
                 </p>
             </div>
         </div>

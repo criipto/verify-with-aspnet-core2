@@ -35,3 +35,41 @@ body {
         display: none;
     }
 }
+
+.login-frame-se-bankid-same-device,
+.login-frame-se-bankid-another-device {
+    width: 600px;
+    height: 300px;
+    border: 0px;
+}
+
+.login-frame-dk-nemid-poces,
+.login-frame-dk-nemid-moces {
+    width: 320px;
+    height: 464px;
+}
+
+.login-frame-dk-nemid-moces-codefile {
+    width: 100%;
+    height: 454px;
+}
+
+.login-frame-no-bankid-central {
+    width: 500px;
+    height: 300px;
+    border: 0px;
+}
+
+.login-frame-no-bankid-mobile {
+    width: 388px;
+    height: 240px;
+    border: 0px;
+}
+
+.hidden-frame {
+    display: none
+}
+
+.visible-frame {
+    display: block
+}
