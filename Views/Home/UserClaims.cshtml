@@ -5,6 +5,14 @@
 }
 <h2>@ViewData["Title"]</h2>
 
+@if (User.Identity.IsAuthenticated) {
+<div class="row">
+    <div class="text-right">
+        <a href="Logout" class="btn btn-primary" role="button">Logout</a>
+    </div>
+</div>
+}
+
 <table class="table">
     <thead>
         <tr>

@@ -56,6 +56,8 @@ namespace VerifyWithAspNetCore2
                 options.ClientId = Configuration["CriiptoVerify:ClientId"];
                 options.ClientSecret = Configuration["CriiptoVerify:ClientSecret"];
                 options.CallbackPath = "/signin-criiptoverify";
+                options.SignedOutCallbackPath = "/signout-criiptoverify";
+                options.SignedOutRedirectUri = "/";
                 options.ResponseType = "code";
                 options.Scope.Clear();
                 options.Scope.Add("openid");
@@ -63,7 +65,7 @@ namespace VerifyWithAspNetCore2
                 options.NonceCookie.SameSite = SameSiteMode.None;
                 options.ResponseMode = OpenIdConnectResponseMode.FormPost;
                 options.Events = new OpenIdConnectEvents
-                {
+                {                    
                     OnRedirectToIdentityProvider = (context) =>
                     {
                         context.Options.CorrelationCookie.SameSite = SameSiteMode.None;

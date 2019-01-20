@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VerifyWithAspNetCore2.Models;
@@ -43,6 +45,11 @@ namespace VerifyWithAspNetCore2.Controllers
                     .Select(c => new ClaimViewModel { ClaimType = c.Type, ClaimValue = c.Value })
                     .ToList();
             return View(viewModels);
+        }
+
+        public async Task Logout()
+        {
+            await HttpContext.SignOutAsync("CriiptoVerify");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
