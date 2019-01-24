@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Newtonsoft.Json.Linq;
 
 namespace VerifyWithAspNetCore2
 {
@@ -58,7 +60,14 @@ namespace VerifyWithAspNetCore2
                 options.CallbackPath = "/signin-criiptoverify";
                 options.SignedOutCallbackPath = "/signout-criiptoverify";
                 options.SignedOutRedirectUri = "/";
-                options.ResponseType = "code";
+                options.ResponseType = Configuration["CriiptoVerify:ResponseType"] ?? "code";
+                if (options.ResponseType == "code id_token")
+                {
+                    // Make the OIDC middleware fetch claims from the userinfo endpoint 
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                    // - and add them all to the generated ClaimsPrincipal
+                    options.ClaimActions.Add(new MapAllClaimsAction());
+                }
                 options.Scope.Clear();
                 options.Scope.Add("openid");
                 options.CorrelationCookie.SameSite = SameSiteMode.None;
@@ -83,6 +92,29 @@ namespace VerifyWithAspNetCore2
                             acrValue = context.Request.Query["acrValue"];
                         }
                         context.ProtocolMessage.AcrValues = acrValue;
+                        return Task.CompletedTask;
+                    },
+                    // Useful troubleshooting hooks follow (not all may be in use, it depends on the value configured for options.ResponseType above)
+                    OnAuthorizationCodeReceived = context =>
+                    {
+                        var code = context.ProtocolMessage.Code;
+                        return Task.CompletedTask;
+                    },
+                    OnTokenResponseReceived = context =>
+                    {
+                        var accessToken = context.ProtocolMessage.AccessToken;
+                        var idToken = context.ProtocolMessage.IdToken;
+                        return Task.CompletedTask;
+                    },
+                    OnUserInformationReceived = context =>
+                    {
+                        var userInfoClaims = 
+                            context.User
+                                .Children()
+                                .OfType<JProperty>()
+                                .Select(prop =>
+                                    new { claimType = prop.Name, claimValues = prop.Values<string>().ToList() })
+                                .ToList();
                         return Task.CompletedTask;
                     }
                 };
