@@ -86,10 +86,13 @@ namespace VerifyWithAspNetCore2
                         // and configure them with so they set the acrValue in a query parameter.
                         // This bit will then roundtrip that value to Criipto Verify dynamically:
                         if (context.Request != null 
-                            && context.Request.Query != null 
-                            && !String.IsNullOrWhiteSpace(context.Request.Query["acrValue"]))
+                            && context.Request.Query != null)
                         {
-                            acrValue = context.Request.Query["acrValue"];
+                            if (!String.IsNullOrWhiteSpace(context.Request.Query["acrValue"]))
+                                acrValue = context.Request.Query["acrValue"];
+                            // Per-request control over the language used by Verify
+                            if (!String.IsNullOrWhiteSpace(context.Request.Query["uiLocale"]))
+                                context.ProtocolMessage.UiLocales = context.Request.Query["uiLocale"];
                         }
                         context.ProtocolMessage.AcrValues = acrValue;
                         return Task.CompletedTask;
